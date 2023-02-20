@@ -1,0 +1,69 @@
+//#include <iostream>
+#include <fstream>
+#include <vector>
+#include <cmath>
+#include <algorithm>
+#include <string>
+#include <deque>
+#include <stack>
+#include <set>
+#include <map>
+#include <deque>
+#include <queue>
+#include <ctime>
+
+
+
+using namespace std;
+
+ifstream cin("input.txt");
+ofstream cout("output.txt");
+
+
+int main() {
+	queue <int> a;
+	string s;
+	while (cin >> s) {
+		if (s == "push") {
+			int tmp;
+			cin >> tmp;
+			a.push(tmp);
+			cout << "ok" << "\n";
+		}
+		else if (s == "pop") {
+			if (a.empty()) {
+				cout << "error" << "\n";
+				continue;
+			}
+			int tmp = a.front();
+			cout << tmp << "\n";
+			a.pop();
+		}
+		else if (s == "front") {
+			if (a.empty()) {
+				cout << "error" << "\n";
+				continue;
+			}
+			int tmp = a.front();
+			cout << tmp << "\n";
+		}
+		else if (s == "size") {
+			cout << a.size() << "\n";
+		}
+		else if (s == "clear") {
+			queue <int> tmp;
+			a = tmp;
+			cout << "ok" << "\n";
+		}
+		else if (s == "exit") {
+			cout << "bye";
+			return 0;
+		}
+		else {
+			cout << "OOooopppssss ERROR!!!";
+			return 0;
+		}
+	}
+
+	return 0;
+}
