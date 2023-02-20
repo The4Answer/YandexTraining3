@@ -1,0 +1,72 @@
+//#include <iostream>
+#include <fstream>
+#include <vector>
+#include <cmath>
+#include <algorithm>
+#include <string>
+#include <deque>
+#include <stack>
+#include <set>
+#include <map>
+#include <deque>
+#include <queue>
+#include <ctime>
+
+
+
+using namespace std;
+
+ifstream cin("input.txt");
+ofstream cout("output.txt");
+
+
+int main() {
+	//read
+	queue <int> f;
+	queue <int> s;
+	for (int i = 0; i < 5; ++i) {
+		int tmp;
+		cin >> tmp;
+		f.push(tmp);
+	}
+	for (int i = 0; i < 5; ++i) {
+		int tmp;
+		cin >> tmp;
+		s.push(tmp);
+	}
+
+	//solve the task
+	for (int i = 0; i < 1000000; ++i) {
+		int f_card = f.front();
+		f.pop();
+		int s_card = s.front();
+		s.pop();
+		if (f_card == 0 && s_card == 9) {
+			f.push(f_card);
+			f.push(s_card);
+		}
+		else if (f_card == 9 && s_card == 0) {
+			s.push(f_card);
+			s.push(s_card);
+		}
+		else if (f_card < s_card) {
+			s.push(f_card);
+			s.push(s_card);
+		}
+		else {
+			f.push(f_card);
+			f.push(s_card);
+		}
+		//Is it ended?
+		if (f.empty()) {
+			cout << "second" << " " << i + 1;
+			return 0;
+		}
+		if (s.empty()) {
+			cout << "first" << " " << i + 1;
+			return 0;
+		}
+	}
+	cout << "botva";
+	return 0;
+}
