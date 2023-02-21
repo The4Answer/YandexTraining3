@@ -1,0 +1,81 @@
+//#include <iostream>
+#include <fstream>
+#include <vector>
+#include <cmath>
+#include <algorithm>
+#include <string>
+#include <deque>
+#include <stack>
+#include <set>
+#include <map>
+#include <deque>
+#include <queue>
+#include <ctime>
+
+
+
+using namespace std;
+
+ifstream cin("input.txt");
+ofstream cout("output.txt");
+
+vector <int> heap;
+
+int Extract() {
+	int ans = heap[0];
+	heap[0] = heap[heap.size() - 1];
+	//rebuild heap after delete
+	int ind = 0;
+	while (ind < heap.size()) {
+		if (ind * 2 + 2 < heap.size()) {
+			if (heap[ind] >= max(heap[ind * 2 + 1], heap[ind * 2 + 2]))
+				break;
+			if (heap[ind * 2 + 1] < heap[ind * 2 + 2]) {
+				swap(heap[ind * 2 + 2], heap[ind]);
+				ind = ind * 2 + 2;
+			}
+			else {
+				swap(heap[ind * 2 + 1], heap[ind]);
+				ind = ind * 2 + 1;
+			}
+		}
+		else {
+			break;
+		}
+	}
+	heap.pop_back();
+	return ans;
+}
+
+void Insert(int value) {
+	heap.push_back(value);
+	int ind = heap.size() - 1;
+	while (ind > 0) {
+		if (heap[ind] > heap[(ind - 1) / 2]) {
+			swap(heap[ind], heap[(ind - 1) / 2]);
+			ind = ind - 1;
+			ind /= 2;
+		}
+		else
+			break;
+	}
+	return;
+}
+
+int main() {
+	int n; 
+	cin >> n;
+	for (int i = 0; i < n; ++i) {
+		int t;
+		cin >> t;
+		if (t == 0) {
+			int val;
+			cin >> val;
+			Insert(val);
+		}
+		else {
+			cout << Extract() << "\n";
+		}
+	}
+	return 0;
+}
