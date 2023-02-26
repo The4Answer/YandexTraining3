@@ -46,10 +46,20 @@ int main() {
 				isGood = false;
 				break;
 			}
+			if (a[i].x <= check[j].y && check[j].y <= a[i].y)
+			{
+				isGood = false;
+				break;
+			}
+			if (a[i].x <= check[j].x && check[j].x <= a[i].y)
+			{
+				isGood = false;
+				break;
+			}
 		}
 		if (isGood) {
 			ans++;
-			
+
 		}
 		check.push_back(a[i]);
 	}
