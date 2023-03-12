@@ -36,10 +36,11 @@ int main() {
 	s--; e--;
 	vector<vector<int>> dist(n * n+1);
 	dist[0].push_back(s);
+	ans[s] = 0;
 	for (int i = 0; i < dist.size(); ++i) {
 		for (int j = 0; j < dist[i].size(); ++j) {
 			for (int z = 0; z < n; ++z) {
-				if (ans[z] <= 0 && a[dist[i][j]][z] == 1) {
+				if (ans[z] <= -1 && a[dist[i][j]][z] == 1) {
 					dist[i + 1].push_back(z);
 					ans[z] = i + 1;
 				}
